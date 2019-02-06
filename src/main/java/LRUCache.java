@@ -5,6 +5,12 @@ public class LRUCache {
 	
 	int capacity=0;
 	
+	/**
+	 * Implementing a Queue based on a doubly-linked list that 
+	 * removes an item in O(1) time. The remove method in
+	 * LinkedList operates in O(n) time as it first searches 
+	 * for the element and then removes it.
+	 */
 	private static class Q {
 		Node qHead;
 	    Node qTail;
@@ -15,11 +21,9 @@ public class LRUCache {
 	        Node next;
 	        Node prev;
 
-	        Node(Node prev, int key, int element, Node next) {
+	        Node(int key, int element) {
 	        	this.key = key;
 	            this.value = element;
-	            this.next = next;
-	            this.prev = prev;
 	        }
 	    }
 		
@@ -54,8 +58,10 @@ public class LRUCache {
 	    	}else{
 	    		Node prevNode = node.prev;
 	    		Node nextNode = node.next;
-	    		prevNode.next = nextNode;
-	    		nextNode.prev = prevNode;
+	    		if(prevNode != null)
+	    			prevNode.next = nextNode;
+	    		if(nextNode != null)
+	    			nextNode.prev = prevNode;
 	    	}
 	    }
 	    
@@ -87,19 +93,20 @@ public class LRUCache {
 	    }
 	}
 	
-	private Q q = new Q();
-	private HashMap<Integer, Q.Node> map = new HashMap<Integer, Q.Node>();
+	// Queue used to hold the elements in the cache 
+	// in the order in which they will be evicted.
+	private Q q;
 	
+	// Used to do O(1)[amortized] cache lookup.
+	private HashMap<Integer, Q.Node> map;	
 	
     public LRUCache(int capacity) {
+    	assert capacity > 0;
+    	q = new Q();
+    	map = new HashMap<Integer, Q.Node>(capacity);
         this.capacity = capacity;
     }
     
-    /**
-     * 
-     * @param key
-     * @return the value associated with the key, -1 if not found
-     */
     public int get(int key) {
     	Q.Node node =  map.get(key);
     	if(node == null){
@@ -111,46 +118,29 @@ public class LRUCache {
         return node.value;
     }
     
-    /**
-     * 
-     * @param key
-     * @param value can not be -1
-     */
     public void put(int key, int value) {
     	Q.Node node =  map.get(key);
-    	if(map.size() >= capacity){
+    	if(map.size() >= capacity && node == null)
+    	{
+    		// cache is full and incoming item is not present in cache, so to make space
+    		// removing the head of the queue. 
     		Q.Node prevHead = q.dequeue();
-    		if(prevHead != null){
-    			map.remove(key);
-    		}
+			map.remove(prevHead.key);
+			// Incoming item will be added in the else part of the following if condition
     	}
-    	if(node != null){
+    	
+    	if(node != null)
+    	{
+    		// Existing item but value has changed.
     		q.moveToEndOfQueue(node);
     		node.value = value;
-    	}else{
-    		node = new Q.Node(null, key, value, null);
-    		q.enqueue(node); 
+    	} 
+    	else 
+    	{
+    		// Incoming item not present in the cache.
+    		node = new Q.Node(key, value);
+    		q.enqueue(node);
+    		map.put(key, node);
     	}
-    }
-    
-    
-    public static void main(String[] args){
-    	LRUCache cache = new LRUCache(2);
-    	cache.put(1, 1);
-    	cache.put(2, 2);
-    	System.out.println("Expected : 1");
-    	cache.get(1);
-    	cache.put(3, 3);
-    	System.out.println("Expected : -1");
-    	cache.get(2);
-    	cache.put(4, 4);
-    	System.out.println("Expected : -1");
-    	cache.get(1);
-    	System.out.println("Expected : 3");
-    	cache.get(3);
-    	System.out.println("Expected : 4");
-    	cache.get(4);    	
-    }
-    
-    
+    }    
 }
