@@ -1,5 +1,5 @@
 
-public class NomberOfIslands {
+public class NumberOfIslands {
 	
 	public int numIslands(char[][] grid) {
     	int count = 0;
@@ -28,7 +28,7 @@ public class NomberOfIslands {
     }
     
     public static void main(String[] args){
-    	NomberOfIslands sol = new NomberOfIslands();
+    	NumberOfIslands sol = new NumberOfIslands();
     	System.out.println(sol.numIslands(new char[][]{{1,1,1,1,0},{1,1,0,1,0},{1,1,0,0,0},{0,0,0,0,0}}));
     	
     }
