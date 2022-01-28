@@ -1,15 +1,27 @@
 # Leetcode solutions
 
 ## To build
-`mvn compile`
+
+```bash
+mvn compile
+````
 
 ## To run tests
-`mvn verify`
+
+```bash
+mvn verify
+```
 
 ## To generate eclipse project files
-`mvn eclipse:eclipse`
+
+```bash
+mvn eclipse:eclipse
+```
 
 ## To run individual test
 
 *Replace the test class name as required
-`mvn clean test -Dtest=ThreeSumClosestTest`
+
+```bash
+mvn clean test -Dtest=ThreeSumClosestTest
+```
