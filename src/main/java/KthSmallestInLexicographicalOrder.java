@@ -18,17 +18,17 @@ The lexicographical order is [1, 10, 11, 12, 13, 2, 3, 4, 5, 6, 7, 8, 9], so the
  */
 public class KthSmallestInLexicographicalOrder {
 	public int findKthNumber(int n, int k) {
-		while(){
-			
-		}
+		// todo
 		return 0;
 	}
 	
 	private int returnCountOfNumbersWithPrefix(int prefix, int numberOfDigitsInPrefix,  int n, int k){
+		//todo: just adding a return statement to make it compile
 		int count = 0;
 		for(int i = prefix; i < n; i++){
 			Math.pow(10, numberOfDigitsInPrefix -1);
 		}
+		return 0;
 	} 
 
 }

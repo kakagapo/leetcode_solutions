@@ -1,3 +1,4 @@
+import java.util.*;
 public class ThreeSumClosest {
     /**
     * Finds three integers in nums such that the sum is closest to target.
@@ -15,8 +16,8 @@ public class ThreeSumClosest {
         // Brute-force O(n^3) solution, where n is the length of nums array
         // Find all possible 3 sums and finds the closest to target.
         for(int i=0; i < nums.length - 2; i++){
-            for(int j=i+1; j < nums.length - 1; i++){
-                for(int k=j+1; j < nums.length; k++ ){
+            for(int j=i+1; j < nums.length - 1; j++){
+                for(int k=j+1; k < nums.length; k++ ){
                     int sum = nums[i] + nums[j] + nums[k];
                     int diff = Math.abs(target - sum); 
                     if(diff < closestSumDiff){
@@ -33,10 +34,6 @@ public class ThreeSumClosest {
         int closestSum = 0;
         int closestSumDiff = Integer.MAX_VALUE;
         
-        int i=0;
-        int j = i+1;
-        int k= nums.length - 1;
-
         Arrays.sort(nums);
 
         for(int i=0; i < nums.length - 2; i++){
