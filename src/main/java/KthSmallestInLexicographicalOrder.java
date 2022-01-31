@@ -24,11 +24,6 @@ public class KthSmallestInLexicographicalOrder {
 	
 	private int returnCountOfNumbersWithPrefix(int prefix, int numberOfDigitsInPrefix,  int n, int k){
 		//todo: just adding a return statement to make it compile
-		int count = 0;
-		for(int i = prefix; i < n; i++){
-			Math.pow(10, numberOfDigitsInPrefix -1);
-		}
 		return 0;
-	} 
-
+	}
 }

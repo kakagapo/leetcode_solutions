@@ -29,8 +29,13 @@ public class NumberOfIslands {
     
     public static void main(String[] args){
     	NumberOfIslands sol = new NumberOfIslands();
-    	System.out.println(sol.numIslands(new char[][]{{1,1,1,1,0},{1,1,0,1,0},{1,1,0,0,0},{0,0,0,0,0}}));
-    	
+    	System.out.println(sol.numIslands(new char[][]
+    			{
+    				{1, 1, 1, 1, 0},
+    				{1, 1, 0, 1, 0},
+    				{1, 1, 0, 0, 0},
+    				{0, 0, 0, 0, 0}
+				}));
     }
 	
 }
